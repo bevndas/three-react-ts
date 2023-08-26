@@ -8,8 +8,8 @@ interface HTMLCanvasProps {
     ndcPointState: StateArray<NDCPoint[]>;
 }
 
-const RIGHT_CLICK = 3;
-const LEFT_CLICK = 1;
+const RIGHT_CLICK = 2;
+const LEFT_CLICK = 0;
 
 const HTMLCanvas:React.FC<HTMLCanvasProps> = ({pointState,ndcPointState}) => {
     const [points, setPoints] = pointState ?? [];
@@ -37,7 +37,7 @@ const HTMLCanvas:React.FC<HTMLCanvasProps> = ({pointState,ndcPointState}) => {
     }
 
     const handleMouseDown = (event: React.MouseEvent<HTMLCanvasElement, MouseEvent>) => {
-        if (event.nativeEvent.which === LEFT_CLICK) {
+        if (event.button === LEFT_CLICK) {
             const canvas = canvasRef.current;
             if (!canvas) return;
 
@@ -52,7 +52,7 @@ const HTMLCanvas:React.FC<HTMLCanvasProps> = ({pointState,ndcPointState}) => {
             );
             setNDCPoints([...ndcPoints, vector]);
         }
-        if (event.nativeEvent.which === RIGHT_CLICK) {
+        if (event.button === RIGHT_CLICK) {
             if (!depth) {
                 setDepth(0.5)
             } else {
