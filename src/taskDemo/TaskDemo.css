@@ -1,0 +1,13 @@
+.model-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 20px;
+}
+
+.model-container .html-canvas {
+
+}
+
+.model-container .threed-model {
+
+}
