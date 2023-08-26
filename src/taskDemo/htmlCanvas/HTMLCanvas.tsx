@@ -18,6 +18,21 @@ const HTMLCanvas:React.FC<HTMLCanvasProps> = ({pointState,ndcPointState}) => {
     const [depth, setDepth] = useState(0);
 
     useEffect(() => {
+        const handleResize = () => {
+            if (!canvasRef.current) return;
+            console.log('here')
+            canvasRef.current.height = window.innerHeight - 260;
+            const ctn = document.getElementById('html-canvas-container') as HTMLDivElement;
+            canvasRef.current.width = ctn.offsetWidth;
+        }
+        handleResize();
+        window.addEventListener('resize', handleResize);
+        return () => {
+            window.removeEventListener('resize', handleResize)
+        }
+    }, [])
+
+    useEffect(() => {
         const handleContextmenu = (e: any) => {
             e.preventDefault()
         }
@@ -93,18 +108,18 @@ const HTMLCanvas:React.FC<HTMLCanvasProps> = ({pointState,ndcPointState}) => {
     };
 
     return (
-        <>
-            <h4>Click to draw!</h4>
+        <div id='html-canvas-container'>
+            <p className='two-dim-view'>2d drawing plane</p>
             <canvas
                 ref={canvasRef}
-                style={{background: 'black'}}
-                width={450}
-                height={500}
+                style={{background: 'black', display: 'block'}}
+                width='100%'
+                height={700}
                 onMouseDown={handleMouseDown}
                 onMouseUp={handleMouseUp}
             />
             <button className='clear-canvas-btn' onClick={clearCanvas}>Clear Canvas</button>
-        </>
+        </div>
     )
 }
 export default HTMLCanvas;

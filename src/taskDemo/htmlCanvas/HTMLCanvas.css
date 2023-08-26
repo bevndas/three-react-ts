@@ -11,3 +11,8 @@
 .clear-canvas-btn:hover {
     background: rgba(127,255,212, .8);
 }
+
+p.two-dim-view {
+    width: 450px;
+    text-align: center;
+}

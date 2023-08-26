@@ -6,7 +6,7 @@ import DrawingCanvas from "./taskDemo/TaskDemo";
 function App() {
   return (
     <div className="App">
-      <h3>Task Demo</h3>
+      <h3 className='title'>Task Demo</h3>
       <DrawingCanvas />
     </div>
   );

@@ -1,13 +1,15 @@
+.usage-information {
+    padding: 8px;
+    background: rgba(127,255,212, 0.8);
+    border-radius: 8px;
+}
+.usage-information p {
+    margin: 0;
+    font-size: 14px;
+}
+
 .model-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-column-gap: 20px;
-}
-
-.model-container .html-canvas {
-
-}
-
-.model-container .threed-model {
-
 }

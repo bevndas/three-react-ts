@@ -17,7 +17,7 @@ const LineGroup: React.FC<LineGroupProps> = ({ndcPoints}) => {
     })
     return (
         <group ref={groupRef}>
-            {ndcPoints.length > 2 && <Line points={ndcPoints.map((point) => [point.x, point.y, point.z])} color={'white'} />}
+            {ndcPoints.length >= 2 && <Line points={ndcPoints.map((point) => [point.x, point.y, point.z])} color={'white'} />}
         </group>
     )
 }
