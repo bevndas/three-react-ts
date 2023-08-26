@@ -31,15 +31,18 @@ const HTMLCanvas:React.FC<HTMLCanvasProps> = ({pointState,ndcPointState}) => {
         }
     }, [])
 
-    useEffect(() => {
-        const handleContextmenu = (e: any) => {
-            e.preventDefault()
-        }
+/*    useEffect(() => {
+
         document.addEventListener('contextmenu', handleContextmenu)
         return function cleanup() {
             document.removeEventListener('contextmenu', handleContextmenu)
         }
-    }, [ ])
+    }, [ ])*/
+
+    const handleContextmenu = (e: any) => {
+        e.preventDefault()
+        e.stopPropagation();
+    }
 
     const handleMouseDown = (event: React.MouseEvent<HTMLCanvasElement, MouseEvent>) => {
         if (event.nativeEvent.which === LEFT_CLICK) {
@@ -117,13 +120,14 @@ const HTMLCanvas:React.FC<HTMLCanvasProps> = ({pointState,ndcPointState}) => {
                     height={700}
                     onMouseDown={handleMouseDown}
                     onMouseUp={handleMouseUp}
+                    onContextMenu={handleContextmenu}
                 />
                 {
                     points.length > 0 &&  <div className='vertices-container'>
                         {
                             points.map(point => {
                                 return (
-                                    <span>
+                                    <span key={new Date().getMilliseconds()}>
                                     {
                                         `(${point.x},${point.y.toFixed(2)})`
                                     }
