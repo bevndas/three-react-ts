@@ -31,14 +31,6 @@ const HTMLCanvas:React.FC<HTMLCanvasProps> = ({pointState,ndcPointState}) => {
         }
     }, [])
 
-/*    useEffect(() => {
-
-        document.addEventListener('contextmenu', handleContextmenu)
-        return function cleanup() {
-            document.removeEventListener('contextmenu', handleContextmenu)
-        }
-    }, [ ])*/
-
     const handleContextmenu = (e: any) => {
         e.preventDefault()
         e.stopPropagation();
@@ -127,7 +119,7 @@ const HTMLCanvas:React.FC<HTMLCanvasProps> = ({pointState,ndcPointState}) => {
                         {
                             points.map(point => {
                                 return (
-                                    <span key={new Date().getMilliseconds()}>
+                                    <span key={point.x + point.y}>
                                     {
                                         `(${point.x},${point.y.toFixed(2)})`
                                     }
