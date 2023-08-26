@@ -20,7 +20,6 @@ const HTMLCanvas:React.FC<HTMLCanvasProps> = ({pointState,ndcPointState}) => {
     useEffect(() => {
         const handleResize = () => {
             if (!canvasRef.current) return;
-            console.log('here')
             canvasRef.current.height = window.innerHeight - 260;
             const ctn = document.getElementById('html-canvas-container') as HTMLDivElement;
             canvasRef.current.width = ctn.offsetWidth;
@@ -109,15 +108,33 @@ const HTMLCanvas:React.FC<HTMLCanvasProps> = ({pointState,ndcPointState}) => {
 
     return (
         <div id='html-canvas-container'>
-            <p className='two-dim-view'>2d drawing plane</p>
-            <canvas
-                ref={canvasRef}
-                style={{background: 'black', display: 'block'}}
-                width='100%'
-                height={700}
-                onMouseDown={handleMouseDown}
-                onMouseUp={handleMouseUp}
-            />
+            <p className='two-dim-view'>2d drawing plane {depth ? '(with depth)' : ''}</p>
+            <div className="canvas">
+                <canvas
+                    ref={canvasRef}
+                    style={{background: 'black', display: 'block'}}
+                    width='100%'
+                    height={700}
+                    onMouseDown={handleMouseDown}
+                    onMouseUp={handleMouseUp}
+                />
+                {
+                    points.length > 0 &&  <div className='vertices-container'>
+                        {
+                            points.map(point => {
+                                return (
+                                    <span>
+                                    {
+                                        `(${point.x},${point.y.toFixed(2)})`
+                                    }
+                                </span>
+                                )
+                            })
+                        }
+                    </div>
+                }
+
+            </div>
             <button className='clear-canvas-btn' onClick={clearCanvas}>Clear Canvas</button>
         </div>
     )
